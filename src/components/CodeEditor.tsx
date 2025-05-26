@@ -5,6 +5,8 @@ import { ViewUpdate } from "@codemirror/view";
 import { markdown } from "@codemirror/lang-markdown";
 import { oneDark } from "@codemirror/theme-one-dark";
 import { marked } from "marked";
+import { vim } from "@replit/codemirror-vim";
+import "./CodeEditor.css";
 
 export default function CodeEditor() {
   const editorRef = useRef<HTMLDivElement>(null);
@@ -24,7 +26,7 @@ export default function CodeEditor() {
 
       const state = EditorState.create({
         doc: "# Start writing Markdown here\n",
-        extensions: [basicSetup, markdown(), oneDark, updateListener],
+        extensions: [basicSetup, markdown(), oneDark, updateListener, vim()],
       });
 
       const view = new EditorView({
@@ -43,9 +45,15 @@ export default function CodeEditor() {
 
   return (
     <div style={{ display: "flex", gap: "20px" }}>
-      <div ref={editorRef} style={{ flex: 1, textAlign: 'left' }} />
+      <div ref={editorRef} style={{ flex: 1, textAlign: "left" }} />
       <div
-        style={{ flex: 1, padding: "10px", border: "1px solid #ccc" }}
+        style={{
+          flex: 1,
+          padding: "10px",
+          border: "1px solid #ccc",
+          textAlign: "left",
+        }}
+        className="markdown-preview"
         dangerouslySetInnerHTML={{ __html: previewContent }}
       />
     </div>

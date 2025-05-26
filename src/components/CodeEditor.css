@@ -1,0 +1,3 @@
+.markdown-preview li:has(input[type="checkbox"]) {
+  list-style: none;
+}
